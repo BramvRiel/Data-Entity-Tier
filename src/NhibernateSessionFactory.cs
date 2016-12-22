@@ -29,9 +29,9 @@ namespace DataEntityTier
             return _sessionFactory.OpenSession();
         }
 
-        public static void Migrate()
+        public static void Migrate(IMigrationLogger MigrationLogger)
         {
-            MigrationLogger.Migrate(new SchemaUpdate(_configuration));
+            Migrator.Migrate(new SchemaUpdate(_configuration), MigrationLogger);
         }
 
         private static Configuration _configuration

@@ -5,6 +5,12 @@ VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data-Entity-Tier", "Data-Entity-Tier.csproj", "{8B30BB89-42A2-4F57-B1B1-F6535FDD8230}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{36617584-6916-4CF0-991D-65982F62CB39}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Relationships", "Samples\Relationships\Relationships.csproj", "{A1E14CF3-CA02-4740-985E-0CF7DADE5815}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Migrations", "Samples\Migrations\Migrations.csproj", "{CD5785AE-3184-414B-A79F-BB05D44E439C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,8 +21,20 @@ Global
 		{8B30BB89-42A2-4F57-B1B1-F6535FDD8230}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B30BB89-42A2-4F57-B1B1-F6535FDD8230}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B30BB89-42A2-4F57-B1B1-F6535FDD8230}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1E14CF3-CA02-4740-985E-0CF7DADE5815}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1E14CF3-CA02-4740-985E-0CF7DADE5815}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1E14CF3-CA02-4740-985E-0CF7DADE5815}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1E14CF3-CA02-4740-985E-0CF7DADE5815}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD5785AE-3184-414B-A79F-BB05D44E439C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD5785AE-3184-414B-A79F-BB05D44E439C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD5785AE-3184-414B-A79F-BB05D44E439C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD5785AE-3184-414B-A79F-BB05D44E439C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A1E14CF3-CA02-4740-985E-0CF7DADE5815} = {36617584-6916-4CF0-991D-65982F62CB39}
+		{CD5785AE-3184-414B-A79F-BB05D44E439C} = {36617584-6916-4CF0-991D-65982F62CB39}
 	EndGlobalSection
 EndGlobal

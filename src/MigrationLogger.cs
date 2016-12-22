@@ -5,44 +5,72 @@ using System.IO;
 
 namespace DataEntityTier
 {
-    public static class MigrationLogger
+    public static class Migrator
     {
-        public static void Migrate(SchemaUpdate schemaUpdate)
+        public static void Migrate(SchemaUpdate schemaUpdate, IMigrationLogger migrationLogger)
         {
-            string dirname = ConfigurationManager.AppSettings["NHibernateSQLMigrations"];
+            schemaUpdate.Execute(migrationLogger.Log(), false);
+        }
+    }
 
-            if (dirname == null)
+    public interface IMigrationLogger
+    {
+        Action<string> Log();
+    }
+
+    public sealed class MigrationFileWriter : IMigrationLogger
+    {
+        private string _directory { get; set; }
+        private string _filename { get; set; }
+
+        private string _path { get { return Path.Combine(_directory, _filename); } }
+
+        public MigrationFileWriter()
+        {
+            this._directory = ConfigurationManager.AppSettings["MigrationsFolder"];
+            this._filename = DateTime.Now.ToString("yyyyMMddhhmmss") + ".sql";
+        }
+
+        public MigrationFileWriter(string directory = null, string filename = null) : base()
+        {
+            if (directory != null)
             {
-                throw new ArgumentNullException("AppSetting NHibernateSQLMigrations not found.");
+                this._directory = directory;
             }
-            if (!Directory.Exists(dirname))
+
+            if (filename != null)
             {
-                throw new DirectoryNotFoundException("Directory NHibernateSQLMigrations not found.");
+                this._filename = filename;
             }
 
-            string filename = DateTime.Now.ToString("yyyyMMddhhmmss") + ".sql";
-            string path = Path.Combine(dirname, filename);
+            Validate();
+        }
 
-            Action<string> LogSql = (string s) =>
+        private void Validate()
+        {
+            if (this._directory == null)
+            {
+                throw new ArgumentNullException("MigrationsFolder", "AppSetting MigrationsFolder not found.");
+            }
+            if (!Directory.Exists(this._directory))
+            {
+                throw new DirectoryNotFoundException("MigrationsFolder not found.");
+            }
+        }
+
+        public Action<string> Log()
+        {
+            return (string s) =>
             {
                 if (!String.IsNullOrWhiteSpace(s))
                 {
-                    using (var sw = File.AppendText(path))
+                    using (var sw = File.AppendText(_path))
                     {
                         sw.WriteLine(s);
                         sw.Close();
                     }
                 }
             };
-
-            try
-            {
-                schemaUpdate.Execute(LogSql, false);
-            }
-            catch
-            {
-                throw new Exception("Failed to write migration log.");
-            }
         }
     }
 }
