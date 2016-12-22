@@ -1,11 +1,10 @@
-﻿using DataEntityTier.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 
 namespace DataEntityTier.DataAccessLayer
 {
-    public interface IGenericDataRepository<T> where T : class
+    public interface IGenericRepository<T> where T : class
     {
         IList<T> GetAll(params Expression<Func<T, object>>[] navigationProperties);
         IList<T> GetList(Func<T, bool> where, params Expression<Func<T, object>>[] navigationProperties);

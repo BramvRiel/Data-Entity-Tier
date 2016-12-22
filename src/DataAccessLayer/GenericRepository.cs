@@ -1,5 +1,4 @@
-﻿using DataEntityTier.Entities;
-using NHibernate;
+﻿using NHibernate;
 using NHibernate.Linq;
 using System;
 using System.Collections.Generic;
@@ -8,7 +7,7 @@ using System.Linq.Expressions;
 
 namespace DataEntityTier.DataAccessLayer
 {
-    public class GenericDataRepository<T> : IGenericDataRepository<T> where T : class
+    public class GenericRepository<T> : IGenericRepository<T> where T : class
     {
         public virtual IList<T> GetAll(params Expression<Func<T, object>>[] navigationProperties)
         {
@@ -63,17 +62,44 @@ namespace DataEntityTier.DataAccessLayer
 
         public void Add(params T[] items)
         {
-            throw new NotImplementedException();
+            using (ISession session = NHibernateSessionFactory.OpenSession())
+            {
+                using (ITransaction trans = session.Transaction)
+                {
+                    foreach (T item in items)
+                        session.Save(item);
+
+                    trans.Commit();
+                }
+            }
         }
 
         public void Update(params T[] items)
         {
-            throw new NotImplementedException();
+            using (ISession session = NHibernateSessionFactory.OpenSession())
+            {
+                using (ITransaction trans = session.Transaction)
+                {
+                    foreach (T item in items)
+                        session.Update(item);
+
+                    trans.Commit();
+                }
+            }
         }
 
         public void Remove(params T[] items)
         {
-            throw new NotImplementedException();
+            using (ISession session = NHibernateSessionFactory.OpenSession())
+            {
+                using (ITransaction trans = session.Transaction)
+                {
+                    foreach (T item in items)
+                        session.Delete(item);
+
+                    trans.Commit();
+                }
+            }
         }
     }
 }

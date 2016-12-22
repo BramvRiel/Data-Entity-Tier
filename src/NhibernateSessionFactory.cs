@@ -1,12 +1,7 @@
-﻿using DataEntityTier.Entities;
-using DataEntityTier.Mappings;
-using FluentNHibernate.Cfg;
-using FluentNHibernate.Cfg.Db;
-using NHibernate;
+﻿using NHibernate;
 using NHibernate.Cfg;
 using NHibernate.Mapping.ByCode;
 using NHibernate.Tool.hbm2ddl;
-using System;
 using System.Reflection;
 using System.Threading;
 
@@ -23,6 +18,26 @@ namespace DataEntityTier
             {
                 _mutex.WaitOne();
 
+                if (_sessionFactory == null)
+                {
+                    _sessionFactory = _configuration.BuildSessionFactory();
+                }
+
+                _mutex.ReleaseMutex();
+            }
+
+            return _sessionFactory.OpenSession();
+        }
+
+        public static void Migrate()
+        {
+            MigrationLogger.Migrate(new SchemaUpdate(_configuration));
+        }
+
+        private static Configuration _configuration
+        {
+            get
+            {
                 var cfg = new Configuration();
                 cfg.DataBaseIntegration(c =>
                 {
@@ -33,18 +48,8 @@ namespace DataEntityTier
                 var mapper = new ModelMapper();
                 mapper.AddMappings(Assembly.GetExecutingAssembly().GetExportedTypes());
                 cfg.AddMapping(mapper.CompileMappingForAllExplicitlyAddedEntities());
-
-                MigrationLogger.Migrate(new SchemaUpdate(cfg));
-
-                if (_sessionFactory == null)
-                {
-                    _sessionFactory = cfg.BuildSessionFactory();
-                }
-
-                _mutex.ReleaseMutex();
+                return cfg;
             }
-
-            return _sessionFactory.OpenSession();
         }
     }
 }
