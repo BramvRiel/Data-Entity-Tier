@@ -54,6 +54,10 @@
       <Project>{8b30bb89-42a2-4f57-b1b1-f6535fdd8230}</Project>
       <Name>Data-Entity-Tier</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Relationships\Relationships.csproj">
+      <Project>{a1e14cf3-ca02-4740-985e-0cf7dade5815}</Project>
+      <Name>Relationships</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

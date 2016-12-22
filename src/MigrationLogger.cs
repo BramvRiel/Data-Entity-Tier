@@ -48,10 +48,6 @@ namespace DataEntityTier
 
         private void Validate()
         {
-            if (this._directory == null)
-            {
-                throw new ArgumentNullException("MigrationsFolder", "AppSetting MigrationsFolder not found.");
-            }
             if (!Directory.Exists(this._directory))
             {
                 throw new DirectoryNotFoundException("MigrationsFolder not found.");
