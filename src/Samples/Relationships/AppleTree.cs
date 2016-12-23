@@ -8,6 +8,11 @@ namespace Relationships
     {
         public virtual int ID { get; set; }
         public virtual IList<Apple> Apples { get; set; }
+
+        public AppleTree()
+        {
+            Apples = new List<Apple>();
+        }
     }
 
     public class AppleTreeMapping : ClassMapping<AppleTree>

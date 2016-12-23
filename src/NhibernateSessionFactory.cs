@@ -41,11 +41,23 @@ namespace DataEntityTier
                 var cfg = new Configuration();
                 cfg.DataBaseIntegration(c =>
                 {
+                    // Console
+                    c.ConnectionString = System.Configuration.ConfigurationManager.AppSettings["connString"];
+                    // Web
                     c.ConnectionStringName = "connString";
+                    // Dialect
                     c.Dialect<NHibernate.Dialect.MsSql2012Dialect>();
                 });
 
                 var mapper = new ModelMapper();
+                string MappingNamespaces = System.Configuration.ConfigurationManager.AppSettings["MappingNamespaces"];
+                if (!string.IsNullOrWhiteSpace(MappingNamespaces))
+                {
+                    foreach (string MappingNamespace in MappingNamespaces.Split(','))
+                    {
+                        mapper.AddMappings(Assembly.Load(MappingNamespace).GetExportedTypes());
+                    }
+                }
                 mapper.AddMappings(Assembly.GetExecutingAssembly().GetExportedTypes());
                 cfg.AddMapping(mapper.CompileMappingForAllExplicitlyAddedEntities());
                 return cfg;
