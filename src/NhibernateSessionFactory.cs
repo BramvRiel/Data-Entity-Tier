@@ -29,9 +29,13 @@ namespace DataEntityTier
             return _sessionFactory.OpenSession();
         }
 
-        public static void Migrate(IMigrationLogger MigrationLogger)
+        public static void Migrate(IMigrationLogger MigrationLogger = null, bool update_database = false)
         {
-            Migrator.Migrate(new SchemaUpdate(_configuration), MigrationLogger);
+            SchemaUpdate schemaUpdate = new SchemaUpdate(_configuration);
+
+            if (MigrationLogger == null) schemaUpdate.Execute(false, update_database);
+
+            Migrator.Migrate(schemaUpdate, MigrationLogger, update_database);
         }
 
         private static Configuration _configuration
