@@ -51,7 +51,7 @@ namespace DataEntityTier
 
                 var mapper = new ModelMapper();
                 string MappingNamespaces = System.Configuration.ConfigurationManager.AppSettings["MappingNamespaces"];
-                if (!string.IsNullOrWhiteSpace(MappingNamespaces))
+                if (MappingNamespaces != null)
                 {
                     foreach (string MappingNamespace in MappingNamespaces.Split(','))
                     {

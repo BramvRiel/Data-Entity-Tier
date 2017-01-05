@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Migrations", "Samples\Migra
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{5F5A2478-86F2-4693-AD7F-214F247845C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MigrationTests", "Tests\MigrationTests\MigrationTests.csproj", "{FF4F9433-9F4E-4ED6-B7FD-BAAFCB595CD8}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,10 +31,6 @@ Global
 		{CD5785AE-3184-414B-A79F-BB05D44E439C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD5785AE-3184-414B-A79F-BB05D44E439C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD5785AE-3184-414B-A79F-BB05D44E439C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FF4F9433-9F4E-4ED6-B7FD-BAAFCB595CD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FF4F9433-9F4E-4ED6-B7FD-BAAFCB595CD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FF4F9433-9F4E-4ED6-B7FD-BAAFCB595CD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FF4F9433-9F4E-4ED6-B7FD-BAAFCB595CD8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,6 +38,5 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{A1E14CF3-CA02-4740-985E-0CF7DADE5815} = {36617584-6916-4CF0-991D-65982F62CB39}
 		{CD5785AE-3184-414B-A79F-BB05D44E439C} = {36617584-6916-4CF0-991D-65982F62CB39}
-		{FF4F9433-9F4E-4ED6-B7FD-BAAFCB595CD8} = {5F5A2478-86F2-4693-AD7F-214F247845C8}
 	EndGlobalSection
 EndGlobal
